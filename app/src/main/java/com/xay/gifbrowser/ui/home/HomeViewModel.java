@@ -12,6 +12,11 @@ public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<ArrayList<Images>> data=new MutableLiveData<>();
 
+    public HomeViewModel()
+    {
+
+    }
+
     public void init() {
 
         if (repositoy == null) {

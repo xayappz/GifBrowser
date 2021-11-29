@@ -38,7 +38,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         requestAppPermissions();
+        if (!InternetConnection.checkConnection(getApplicationContext())) {
+         //   OnInternet();
+        } else {
 
+        }
     }
 
     private void requestAppPermissions() {
@@ -71,14 +75,15 @@ public class MainActivity extends AppCompatActivity {
             case 0:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     File directoryToStore;
-
                     directoryToStore = getBaseContext().getExternalFilesDir(".Gifs");
                     if (!directoryToStore.exists()) {
                         if (directoryToStore.mkdir()) ;
                     }
                     rootpath = directoryToStore.getAbsolutePath();
 
-
+                    if (!InternetConnection.checkConnection(getApplicationContext())) {
+                        //OnInternet();
+                    }
                 } else {
                     Toast.makeText(this, "Permission Required", Toast.LENGTH_SHORT).show();
                     finish();
@@ -114,7 +119,15 @@ public class MainActivity extends AppCompatActivity {
         alert.show();
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!InternetConnection.checkConnection(getApplicationContext())) {
+           // OnInternet();
+        } else {
+       //     FragmentChangeer.Frags(this,new NoInternet());
+        }
+    }
 
 //   public void loadFragment(Fragment fragment) {
 //        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

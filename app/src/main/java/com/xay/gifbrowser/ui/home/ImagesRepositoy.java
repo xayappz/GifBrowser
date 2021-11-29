@@ -62,7 +62,7 @@ public class ImagesRepositoy {
     public void getCallApi() {
         dataset = new ArrayList<>();
         data = new MutableLiveData<>();
-        request = new StringRequest(Request.Method.GET, ImageApi + mCtx.getString(R.string.Apikey) + "&limit=25", new Response.Listener<String>() {
+        request = new StringRequest(Request.Method.GET, ImageApi + mCtx.getString(R.string.Apikey) + "", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("responsefromserv", response + ".");

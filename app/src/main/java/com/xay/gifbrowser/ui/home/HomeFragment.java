@@ -36,24 +36,28 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = root.findViewById(R.id.my_recycler_view);
+        if (!InternetConnection.checkConnection(getActivity())) {
+       //     FragmentChangeer.Frags(getActivity(), new NoInternet());
 
+
+        }
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         new ImagesRepositoy(getActivity());
         homeViewModel.init();
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        recyclerView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
 
-        homeViewModel.getIMAGES().observe(getActivity(), new Observer<ArrayList<Images>>() {
+        myGifAdapter = new MyGifAdapter(getContext(), homeViewModel.getIMAGES().getValue());
+        recyclerView.setAdapter(myGifAdapter); // set the Adapter to RecyclerView
+
+        homeViewModel.getIMAGES().observe(requireActivity(), new Observer<ArrayList<Images>>() {
             @Override
             public void onChanged(ArrayList<Images> s) {
                 myGifAdapter.setImages(s);
                 myGifAdapter.notifyDataSetChanged();
             }
         });
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
-        recyclerView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
-
-        myGifAdapter = new MyGifAdapter(getContext(), homeViewModel.getIMAGES().getValue());
-        recyclerView.setAdapter(myGifAdapter); // set the Adapter to RecyclerView
 
         return root;
     }
