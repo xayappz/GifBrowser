@@ -3,5 +3,5 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Offline Images</string>
     <string name="title_notifications">About App</string>
-    <string name="Apikey">Api key</string>
+    <string name="Apikey">Key</string>
 </resources>
