@@ -12,18 +12,12 @@ public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<ArrayList<Images>> data=new MutableLiveData<>();
 
-    public HomeViewModel()
-    {
-
-    }
-
     public void init() {
 
-        if (data == null) {
-            return;
+        if (repositoy == null) {
+            repositoy = ImagesRepositoy.getInstance();
+            data = repositoy.getIMAGES();
         }
-        repositoy = ImagesRepositoy.getInstance();
-        data = repositoy.getIMAGES();
     }
 
     public MutableLiveData<ArrayList<Images>> getIMAGES() {

@@ -36,11 +36,7 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = root.findViewById(R.id.my_recycler_view);
-        if (!InternetConnection.checkConnection(getActivity())) {
-            FragmentChangeer.Frags(getActivity(), new NoInternet());
 
-
-        }
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         new ImagesRepositoy(getActivity());
